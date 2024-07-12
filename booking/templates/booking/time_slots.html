@@ -1,0 +1,16 @@
+<!-- time_slots.html -->
+{% extends 'booking/base.html' %}
+{% load static %}
+{% block title %}Créneaux horaires disponibles - BookMe{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">Créneaux horaires disponibles</h2>
+    <div class="list-group">
+        {% for slot in slots %}
+            <a href="{% url 'book_slot' slot.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                {{ slot.date }} {{ slot.start_time }} - {{ slot.end_time }}
+                <span class="badge badge-success">Disponible</span>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

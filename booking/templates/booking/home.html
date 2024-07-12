@@ -1,0 +1,28 @@
+<!-- home.html -->
+{% extends 'booking/base.html' %} {% load static %} {% block title %}Accueil -
+BookMe{% endblock %} {% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">Bienvenue sur BookMe</h1>
+  <p class="lead">
+    Bienvenue sur BookMe, votre solution intuitive pour la réservation de
+    créneaux afin de planifier un entretien avec moi, développeur web. Avec
+    BookMe, simplifiez votre processus de planification en sélectionnant
+    facilement les dates et heures qui vous conviennent le mieux. Notre
+    interface conviviale vous permet de visualiser rapidement les créneaux
+    disponibles, de réserver votre rendez-vous en quelques clics, et de gérer
+    vos réservations en toute simplicité. Que vous soyez à la recherche de
+    conseils en développement web, de discussions sur un projet particulier, ou
+    simplement d'échanger des idées, BookMe est là pour vous aider à organiser
+    votre emploi du temps efficacement.
+  </p>
+  <hr class="my-4" />
+  <p>
+    Commencez dès maintenant en explorant nos disponibilités et en planifiant
+    votre prochain entretien avec moi. Bienvenue sur BookMe, où la rencontre
+    avec votre développeur web devient aussi simple que quelques clics.
+  </p>
+  <a class="btn btn-primary btn-lg" href="{% url 'time_slots' %}" role="button"
+    >Réserver un créneau</a
+  >
+</div>
+{% endblock %}

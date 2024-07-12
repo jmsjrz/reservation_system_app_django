@@ -1,0 +1,19 @@
+<!-- my_reservations.html -->
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block title %}Mes Réservations - BookMe{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">Mes Réservations</h2>
+    <ul class="list-group">
+        {% for reservation in reservations %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ reservation.time_slot.date }} {{ reservation.time_slot.start_time }} - {{ reservation.time_slot.end_time }}
+                <a href="{% url 'cancel_reservation' reservation.id %}" class="btn btn-danger btn-sm">Annuler</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Vous n'avez aucune réservation.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
