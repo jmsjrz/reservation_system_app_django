@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion/Inscription</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-container {
+            display: none;
+        }
+        .form-container.active {
+            display: block;
+        }
+        .toggle-buttons {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="toggle-buttons text-center">
+                    <button id="login-btn" class="btn btn-primary">Se connecter</button>
+                    <button id="register-btn" class="btn btn-secondary">S'inscrire</button>
+                </div>
+                <div id="login-form" class="form-container active">
+                    <h2>Se connecter</h2>
+                    <form method="post" action="{% url 'login_register' %}">
+                        {% csrf_token %}
+                        {{ login_form.as_p }}
+                        {% if login_form.errors %}
+                            <div class="alert alert-danger">
+                                {{ login_form.errors }}
+                            </div>
+                        {% endif %}
+                        <button type="submit" name="login" class="btn btn-primary">Se connecter</button>
+                    </form>
+                </div>
+                <div id="register-form" class="form-container">
+                    <h2>S'inscrire</h2>
+                    <form method="post" action="{% url 'login_register' %}">
+                        {% csrf_token %}
+                        {{ register_form.as_p }}
+                        {% if register_form.errors %}
+                            <div class="alert alert-danger">
+                                {{ register_form.errors }}
+                            </div>
+                        {% endif %}
+                        <button type="submit" name="register" class="btn btn-success">S'inscrire</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+
+            loginBtn.addEventListener('click', function() {
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+                loginBtn.classList.add('btn-primary');
+                loginBtn.classList.remove('btn-secondary');
+                registerBtn.classList.add('btn-secondary');
+                registerBtn.classList.remove('btn-primary');
+            });
+
+            registerBtn.addEventListener('click', function() {
+                registerForm.classList.add('active');
+                loginForm.classList.remove('active');
+                registerBtn.classList.add('btn-primary');
+                registerBtn.classList.remove('btn-secondary');
+                loginBtn.classList.add('btn-secondary');
+                loginBtn.classList.remove('btn-primary');
+            });
+        });
+    </script>
+</body>
+</html>
