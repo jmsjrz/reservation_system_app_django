@@ -12,9 +12,20 @@
         body {
             margin: 0;
             padding: 0;
+            padding-bottom: 60px; /* Pour éviter que le contenu soit masqué par le footer */
         }
         .navbar {
             margin-bottom: 0; /* Supprime l'espace sous la navbar */
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            text-align: center;
+            border-top: 1px solid #e7e7e7;
         }
     </style>
 </head>
@@ -49,6 +60,15 @@
         {% block content %}
         {% endblock %}
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="mb-0">
+                <a href="{% url 'admin:index' %}">Panneau d'administration</a>
+            </p>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

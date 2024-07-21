@@ -7,16 +7,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .form-container {
-            display: none;
+            position: absolute;
+            width: 100%;
+            transition: transform 0.5s ease-in-out;
         }
         .form-container.active {
-            display: block;
+            transform: translateX(0);
+        }
+        .form-container.inactive {
+            transform: translateX(100%);
         }
         .toggle-buttons {
+            display: flex;
+            justify-content: center;
             margin-bottom: 20px;
+        }
+        .toggle-buttons button {
+            flex: 1;
         }
         .navbar {
             margin-bottom: 20px;
+        }
+        .card-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: 400px; /* Adjust as needed */
         }
     </style>
 </head>
@@ -55,66 +71,76 @@
                     <button id="login-btn" class="btn btn-primary">Se connecter</button>
                     <button id="register-btn" class="btn btn-secondary">S'inscrire</button>
                 </div>
-                <div id="login-form" class="form-container active">
-                    <h2>Se connecter</h2>
-                    <form method="post" action="{% url 'login_register' %}">
-                        {% csrf_token %}
-                        {{ login_form.non_field_errors }}
-                        <div class="form-group">
-                            {{ login_form.username.label_tag }}
-                            {{ login_form.username }}
-                            {% if login_form.username.errors %}
-                                <div class="alert alert-danger">
-                                    {{ login_form.username.errors }}
-                                </div>
-                            {% endif %}
+                <div class="card-container">
+                    <div id="login-form" class="form-container active">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Se connecter</h2>
+                                <form method="post" action="{% url 'login_register' %}">
+                                    {% csrf_token %}
+                                    {{ login_form.non_field_errors }}
+                                    <div class="form-group">
+                                        {{ login_form.username.label_tag }}
+                                        {{ login_form.username }}
+                                        {% if login_form.username.errors %}
+                                            <div class="alert alert-danger">
+                                                {{ login_form.username.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ login_form.password.label_tag }}
+                                        {{ login_form.password }}
+                                        {% if login_form.password.errors %}
+                                            <div class="alert alert-danger">
+                                                {{ login_form.password.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <button type="submit" name="login" class="btn btn-primary">Se connecter</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            {{ login_form.password.label_tag }}
-                            {{ login_form.password }}
-                            {% if login_form.password.errors %}
-                                <div class="alert alert-danger">
-                                    {{ login_form.password.errors }}
-                                </div>
-                            {% endif %}
+                    </div>
+                    <div id="register-form" class="form-container inactive">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">S'inscrire</h2>
+                                <form method="post" action="{% url 'login_register' %}">
+                                    {% csrf_token %}
+                                    {{ register_form.non_field_errors }}
+                                    <div class="form-group">
+                                        {{ register_form.username.label_tag }}
+                                        {{ register_form.username }}
+                                        {% if register_form.username.errors %}
+                                            <div class="alert alert-danger">
+                                                {{ register_form.username.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ register_form.password1.label_tag }}
+                                        {{ register_form.password1 }}
+                                        {% if register_form.password1.errors %}
+                                            <div class="alert alert-danger">
+                                                {{ register_form.password1.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ register_form.password2.label_tag }}
+                                        {{ register_form.password2 }}
+                                        {% if register_form.password2.errors %}
+                                            <div class="alert alert-danger">
+                                                {{ register_form.password2.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <button type="submit" name="register" class="btn btn-success">S'inscrire</button>
+                                </form>
+                            </div>
                         </div>
-                        <button type="submit" name="login" class="btn btn-primary">Se connecter</button>
-                    </form>
-                </div>
-                <div id="register-form" class="form-container">
-                    <h2>S'inscrire</h2>
-                    <form method="post" action="{% url 'login_register' %}">
-                        {% csrf_token %}
-                        {{ register_form.non_field_errors }}
-                        <div class="form-group">
-                            {{ register_form.username.label_tag }}
-                            {{ register_form.username }}
-                            {% if register_form.username.errors %}
-                                <div class="alert alert-danger">
-                                    {{ register_form.username.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            {{ register_form.password1.label_tag }}
-                            {{ register_form.password1 }}
-                            {% if register_form.password1.errors %}
-                                <div class="alert alert-danger">
-                                    {{ register_form.password1.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            {{ register_form.password2.label_tag }}
-                            {{ register_form.password2 }}
-                            {% if register_form.password2.errors %}
-                                <div class="alert alert-danger">
-                                    {{ register_form.password2.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        <button type="submit" name="register" class="btn btn-success">S'inscrire</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -133,6 +159,8 @@
             loginBtn.addEventListener('click', function() {
                 loginForm.classList.add('active');
                 registerForm.classList.remove('active');
+                loginForm.classList.remove('inactive');
+                registerForm.classList.add('inactive');
                 loginBtn.classList.add('btn-primary');
                 loginBtn.classList.remove('btn-secondary');
                 registerBtn.classList.add('btn-secondary');
@@ -142,6 +170,8 @@
             registerBtn.addEventListener('click', function() {
                 registerForm.classList.add('active');
                 loginForm.classList.remove('active');
+                registerForm.classList.remove('inactive');
+                loginForm.classList.add('inactive');
                 registerBtn.classList.add('btn-primary');
                 registerBtn.classList.remove('btn-secondary');
                 loginBtn.classList.add('btn-secondary');
