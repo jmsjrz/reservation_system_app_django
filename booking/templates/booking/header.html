@@ -8,22 +8,19 @@
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'time_slots' %}">Réserver un créneau</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'my_reservations' %}">Mes réservations</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'time_slots' %}">Réserver un créneau</a>
                 </li>
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login_register' %}">Se connecter / S'inscrire</a>
                 </li>
             {% endif %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'time_slots' %}">Réserver un créneau</a>
-            </li>
         </ul>
-	    </div>
+    </div>
 </nav>
