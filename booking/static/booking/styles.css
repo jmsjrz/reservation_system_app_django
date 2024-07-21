@@ -86,3 +86,35 @@ body {
     overflow: hidden;
     height: 400px; /* Ajustez selon les besoins */
 }
+
+/* styles.css */
+.form-container {
+    position: absolute;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.form-container.active {
+    transform: translateX(0);
+}
+
+.form-container.inactive {
+    transform: translateX(100%);
+}
+
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+    flex: 1;
+}
+
+.card-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 400px; /* Ajustez selon les besoins */
+}
