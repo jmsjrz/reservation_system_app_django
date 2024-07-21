@@ -130,3 +130,6 @@ STATICFILES_DIRS = [
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Définir l'URL de connexion pour les utilisateurs non authentifiés
+LOGIN_URL = '/login_register/'
