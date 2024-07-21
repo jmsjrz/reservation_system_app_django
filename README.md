@@ -10,7 +10,7 @@ L'application de système de réservation est une application web développée a
 - Tableau de bord administrateur pour gérer les services, les réservations et les utilisateurs
 
 ###  Installation
-1. Cloner le dépôt : `git clone https://github.com/votre-nom-utilisateur/application-systeme-reservation.git`
+1. Cloner le dépôt : `git clone git@github.com:jmsjrz/reservation_system_app_django.git`
 2. Installer les dépendances requises : `pip install -r requirements.txt`
 3. Configurer la base de données : `python3 manage.py migrate`
 4. Créer un superutilisateur : `python3 manage.py createsuperuser`
